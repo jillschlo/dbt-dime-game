@@ -113,13 +113,7 @@ class App extends Component {
 
         let links = [(
                 <li key='link1'>
-                    <a className='navbar-link' href="https://borderlinebabble.com/2015/12/08/dbt-skills-group-interpersonal-effectiveness-weeks-5-6/">
-                        Dime Game Worksheet
-                    </a>
-                </li>
-            ),(
-                <li key='link2'>
-                    <a className='navbar-link' href="https://www.amazon.com/Skills-Training-Handouts-Worksheets-Second/dp/1572307811/ref=sr_1_2?ie=UTF8&qid=1493762186&sr=8-2&keywords=dbt+workbook">
+                    <a className='navbar-link' href="https://www.amazon.com/Skills-Training-Handouts-Worksheets-Second/dp/1572307811/">
                         DBT® Skills Training Handouts and Worksheets, Second Edition
                     </a>
                 </li>
@@ -163,7 +157,6 @@ class App extends Component {
 const meta = {
     viewport: 'width=device-width, initial-scale:1.0, maximum-scale=1',
     description: 'Use the DBT "Dime Game" to determine how forcefully to ask or say no to a request',
-    canonical: 'http://dfdx.us/dbt-dime-game',
     meta: {
         name: {
             keywords: 'dbt,dime game,interpersonal effectiveness',
