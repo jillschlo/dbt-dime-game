@@ -1,10 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import { createRoot } from "react-dom/client";
 import App from './components/app';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+const container = document.getElementById("root");
+const root = createRoot(container); // React 18+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );

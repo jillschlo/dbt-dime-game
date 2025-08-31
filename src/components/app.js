@@ -1,6 +1,7 @@
 import '../styles/app.css';
 import React, { Component } from 'react';
-import { Grid, Jumbotron, Navbar } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
 import DocumentMeta from 'react-document-meta';
 import { PromptCount } from '../classes/prompts';
 import DecisionTypeChooser from './decision-type-chooser';
@@ -77,93 +78,150 @@ class App extends Component {
     }
 
     render() {
-        let q = null,
-            jumboTitle = this.state.decisionType === null ? 'Do I ask?  Do I say no?' :
-                         this.state.decisionType === 'ask' ? 'Do I ask?  How assertively?': 'Do I say no?  How assertively?',
-            jumboDesc = null,
-            jumboHiddenXs = 'hidden-xs';
+  let q = null;
 
-        switch (this.state.stage) {
-            case 'pickDecisionType':
-                q = <DecisionTypeChooser onChoose={this.handleDecisionTypeChoice} />;
-                jumboHiddenXs = null;
-                jumboDesc = (
-                    <p>
-                        If you have difficulty deciding how assertively to make a request or to decline someone else's
-                        request, try using the <i>Dime Game</i> from the DBT Interpersonal Effectiveness module.  We'll
-                        ask a series of yes-or-no questions.  At the end, we'll tally the results, and give you guidance
-                        on how strongly to ask or decline.
-                    </p>
-                );
-                break;
+  const jumboTitle =
+    this.state.decisionType === null
+      ? "Do I ask?  Do I say no?"
+      : this.state.decisionType === "ask"
+      ? "Do I ask?  How assertively?"
+      : "Do I say no?  How assertively?";
 
-            case 'prompts':
-                q = <Prompt key='prompts' onPromptAnswered={this.handlePromptAnswered} onDone={this.handlePromptsDone}
-                        dimes={this.state.dimes} decisionType={this.state.decisionType} />;
-                break;
+  let jumboDesc = null;
 
-            case 'showResults':
-                q = <Result dimes={this.state.dimes} decisionType={this.state.decisionType} answers={this.state.answers}
-                        onRestart={this.handleRestart} onToggleAnswer={this.handleToggleAnswer} />
-                break;
+  // In BS5, visibility utilities use d-*-*
+  // Original logic: hide hero on XS unless we're picking decision type
+  let jumboVisibility =
+    this.state.stage === "pickDecisionType" ? "" : "d-none d-sm-block";
 
-            default:
-                break;
-        }
+  switch (this.state.stage) {
+    case "pickDecisionType":
+      q = <DecisionTypeChooser onChoose={this.handleDecisionTypeChoice} />;
+      jumboDesc = (
+        <p>
+          If you have difficulty deciding how assertively to make a request or
+          to decline someone else's request, try using the <i>Dime Game</i> from
+          the DBT Interpersonal Effectiveness module. We'll ask a series of
+          yes-or-no questions. At the end, we'll tally the results and give you
+          guidance on how strongly to ask or decline.
+        </p>
+      );
+      break;
 
-        let links = [(
-                <li key='link1'>
-                    <a className='navbar-link' href="https://www.amazon.com/Skills-Training-Handouts-Worksheets-Second/dp/1572307811/">
-                        DBT® Skills Training Handouts and Worksheets, Second Edition
-                    </a>
-                </li>
-            )];
+    case "prompts":
+      q = (
+        <Prompt
+          key="prompts"
+          onPromptAnswered={this.handlePromptAnswered}
+          onDone={this.handlePromptsDone}
+          dimes={this.state.dimes}
+          decisionType={this.state.decisionType}
+        />
+      );
+      break;
 
-        return (
-            <div className='App'>
-                <DocumentMeta {...meta} />
-                <Jumbotron className={ jumboHiddenXs } style={{textAlign: 'left'}}>
-                    <Grid bsClass='container'>
-                        <h1>{jumboTitle}</h1>
-                        {jumboDesc}
-                    </Grid>
-                </Jumbotron>
-                <Grid bsStyle='container' className='app-container'>
-                    {q}
-                </Grid>
-                <Navbar fixedBottom className='hidden-xs'>
-                    <div className='navbar-text' style={{marginLeft: 0}}>
-                        <ul className='list-inline hidden-sm'>
-                            {links}
-                        </ul>
-                        <ul className='list-unstyled visible-sm'>
-                            {links}
-                        </ul>
-                    </div>
-                    <div className='navbar-right navbar-text' style={{marginRight: 0, marginLeft: 0}}>
-                        <ul className='list-inline'>
-                            <li>
-                                <a className='navbar-link' href="https://github.com/dfoverdx/dbt-dime-game">Source Code</a>
-                            </li>
-                            <li><a href='/'>Bethany Hitch</a> © 2023</li>
-                        </ul>
-                    </div>
-                </Navbar>
-            </div>
-        );
-    }
-}
+    case "showResults":
+      q = (
+        <Result
+          dimes={this.state.dimes}
+          decisionType={this.state.decisionType}
+          answers={this.state.answers}
+          onRestart={this.handleRestart}
+          onToggleAnswer={this.handleToggleAnswer}
+        />
+      );
+      break;
 
-const meta = {
-    viewport: 'width=device-width, initial-scale:1.0, maximum-scale=1',
-    description: 'Use the DBT "Dime Game" to determine how forcefully to ask or say no to a request',
+    default:
+      break;
+  }
+
+  const links = [
+    <li key="link1" className="list-inline-item">
+      <a
+        className="link-secondary"
+        href="https://www.amazon.com/Skills-Training-Handouts-Worksheets-Second/dp/1572307811/"
+      >
+        DBT® Skills Training Handouts and Worksheets, Second Edition
+      </a>
+    </li>,
+  ];
+
+  // Move meta definition above return so it's reachable
+  var meta = {
+    title: "DBT Dime Game",
+    description:
+      'Use the DBT "Dime Game" to determine how forcefully to ask or say no to a request',
+    canonical: "https://www.dimegame.online/",
     meta: {
-        name: {
-            keywords: 'dbt,dime game,interpersonal effectiveness',
-            author: 'Jordan Hitch'
-        }
+      name: {
+        viewport: "width=device-width, initial-scale=1.0, maximum-scale=1.0",
+        keywords: "dbt,dime game,interpersonal effectiveness",
+        author: "Jordan Hitch",
+      },
+      property: {
+        "og:title": "DBT Dime Game",
+        "og:description":
+          'Use the DBT "Dime Game" to determine how forcefully to ask or say no to a request',
+        "og:type": "website",
+      },
     },
-    title: 'DBT Dime Game'
+  };
+
+  return (
+    <div className="App">
+      <DocumentMeta {...meta} />
+
+      {/* BS5 replacement for Jumbotron */}
+      <div className={`p-5 mb-4 bg-light rounded-3 ${jumboVisibility}`}>
+        <Container>
+          <h1 className="display-6">{jumboTitle}</h1>
+          {jumboDesc}
+        </Container>
+      </div>
+
+      {/* Main content container */}
+      <Container className="app-container">{q}</Container>
+
+      {/* Fixed bottom bar; hidden on XS like your original */}
+      <Navbar
+        fixed="bottom"
+        className="d-none d-sm-block bg-body-tertiary border-top"
+      >
+        <Container className="d-flex justify-content-between align-items-center py-2">
+          {/* Left links */}
+          <ul className="list-inline mb-0">{links}</ul>
+
+          {/* Right links */}
+          <ul className="list-inline mb-0">
+            <li className="list-inline-item">
+              <a
+                className="link-secondary"
+                href="https://github.com/dfoverdx/dbt-dime-game"
+              >
+                Source Code
+              </a>
+            </li>
+            <li className="list-inline-item">
+              <a className="link-secondary" href="/">
+                Bethany Hitch
+              © 2023
+                </a>
+            </li>
+            <li className="list-inline-item">
+            <a
+                className="link-secondary"
+                href="https://github.com/jillschlo/dbt-dime-game"
+              >
+                Maintained by Jillian Schlotfeldt
+              </a>
+              </li>
+          </ul>
+        </Container>
+      </Navbar>
+    </div>
+  );
+};
 };
 
 export default App;

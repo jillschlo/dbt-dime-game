@@ -42,10 +42,10 @@ export default class Prompt extends React.Component {
                 </div>
                 <div style={{textAlign: 'center'}}>
                     <Button className='app-btn' onClick={() => this.handleChoice('yes', yesAddDime)}>
-                        <span className='prompt-text text-success'>Yes</span>
+                        <span className='prompt-text text-success text-black'>Yes</span>
                     </Button>
                     <Button className='app-btn' onClick={() => this.handleChoice('no', !yesAddDime)}>
-                        <span className='prompt-text text-danger'>No</span>
+                        <span className='prompt-text text-black'>No</span>
                     </Button>
                 </div>
                 <div style={styles.centeredContainer}>

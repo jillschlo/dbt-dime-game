@@ -9,12 +9,12 @@ export default class DecisionTypeChooser extends React.Component {
                 <h2 className='col-xs-12'>Which decision are you trying to make?</h2>
                 <Button className='app-btn' onClick={() => this.props.onChoose('ask')}>
                     <span className='decision-type-text'>
-                        Do I <span className='text-primary'>ask</span> someone for something?  How assertively?
+                        Do I <span className='text-white'>ask</span> someone for something?  How assertively?
                     </span>
                 </Button>
                 <Button className='app-btn' onClick={() => this.props.onChoose('sayNo')}>
                     <span className='decision-type-text'>
-                        Do I <span className='text-primary'>decline</span> someone's request?  How assertively?
+                        Do I <span className='text-white'>decline</span> someone's request?  How assertively?
                     </span>
                 </Button>
             </div>
