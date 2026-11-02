@@ -16,7 +16,7 @@ const results = {
         'Do what the other person wants without being asked.', // answer for both 0 and 1 dimes--DBT page was missing 0-dime answer
         'Do what the other person wants without being asked.',
         'Don\'t complain; do it cheerfully.',
-        'Do it, even if you\'re not cheeful about it.',
+        'Do it, even if you\'re not cheerful about it.',
         'Do it, but show that you\'d rather not.',
         'Say you\'d rather not, but do it gracefully.',
         'Say no confidently, but reconsider.',
